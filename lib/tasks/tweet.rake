@@ -7,7 +7,9 @@ namespace :tweet do
   end
 
   desc "Calculates the user with the biggest number of tweets"
-  task biggest: :environment do
+  task top: :environment do
+    top = Tweet.top
+    puts top[:user] + " - " + top[:count].to_s + " tweets"
   end
 
   private
