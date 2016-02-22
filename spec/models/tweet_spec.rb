@@ -5,11 +5,11 @@ RSpec.describe Tweet, type: :model do
 
   context "Tweet unit testing" do
     it "shouldn't accept tweets over 140 characters" do
-      expect(Tweet.new(text: "a" * 141, user: "Yuri")).to_not be_valid
+      expect(Tweet.new(text: "a" * 141, user: "Yuri", tweeted_at: Time.now)).to_not be_valid
     end
 
     it "shouldn't accept empty tweets" do
-      expect(Tweet.new(text: "", user: "Yuri")).to_not be_valid
+      expect(Tweet.new(text: "", user: "Yuri", tweeted_at: Time.now)).to_not be_valid
     end
 
     it "shouldn't accept empty usernames" do
@@ -17,7 +17,7 @@ RSpec.describe Tweet, type: :model do
     end
 
     it "should accept a valid tweet" do
-      expect(Tweet.new(text: "a", user: "Yuri")).to be_valid
+      expect(Tweet.new(text: "a", user: "Yuri", tweeted_at: Time.now)).to be_valid
     end
   end
 

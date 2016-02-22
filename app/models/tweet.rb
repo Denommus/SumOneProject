@@ -1,6 +1,7 @@
 class Tweet < ActiveRecord::Base
   validates :text, length: {minimum: 1, maximum: 140}
   validates :user, length: {minimum: 1}
+  validates :tweeted_at, presence: true
 
   # queries the user with the most tweets
   scope :top, -> { select("count(tweets.user) as count, tweets.user").group(:user).order('count desc').first }
