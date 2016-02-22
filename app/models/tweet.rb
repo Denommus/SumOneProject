@@ -8,7 +8,7 @@ class Tweet < ActiveRecord::Base
 
   def self.average_tweets()
     sql = "SELECT COUNT(*), extract(hour from tweets.tweeted_at) AS hour FROM tweets GROUP BY hour ORDER BY hour"
-    averages = Tweet.connection.select_all(sql).map { |r| { count: r["count"].to_f/(Time.now-Tweet.order(:tweeted_at).first.tweeted_at).days, hour: r["hour"] } }
+    averages = Tweet.connection.select_all(sql).map { |r| { count: r["count"].to_f/(Tweet.order(:tweeted_at).last.tweeted_at-Tweet.order(:tweeted_at).first.tweeted_at).days, hour: r["hour"] } }
     averages
   end
 end
